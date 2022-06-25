@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import androidx.annotation.RequiresApi;
 
 public class DBHelper extends SQLiteOpenHelper {
-    public static final String DATABASE_NAME = "primarydb.db";
+    public static final String DATABASE_NAME = "passwordsDB.db";
     public static final String PASSWORD_TABLE_NAME = "passwordManagerTable";
     public static final String PASSWORD_COLUMN_ID = "id";
     public static final String PASSWORD_COLUMN_Appliction = "application";
@@ -40,7 +40,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     public DBHelper(Context context) {
-        super(context, DATABASE_NAME, null, 16);
+        super(context, DATABASE_NAME, null, 1);
     }
 
 
@@ -134,12 +134,13 @@ public class DBHelper extends SQLiteOpenHelper {
         return numRows;
     }
 
-    public boolean updateData(String application, String username, String password) {
+    public boolean updateData(String application, String username, String password,String domain,String url) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(PASSWORD_COLUMN_Appliction, application);
-        //contentValues.put(PASSWORD_COLUMN_USERNAME, username);
+        contentValues.put(PASSWORD_COLUMN_URL, url);
+        contentValues.put(PASSWORD_COLUMN_USERNAME, username);
         contentValues.put(PASSWORD_COLUMN_PASSWORD, password);
+        contentValues.put(PASSWORD_COLUMN_DOMAIN, domain);
         java.util.Date date = new java.util.Date();
         contentValues.put(PASSWORD_COLUMN_LASTUPDATED, date.getTime());
 

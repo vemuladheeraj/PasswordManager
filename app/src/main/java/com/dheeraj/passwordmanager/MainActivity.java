@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.Executor;
@@ -38,6 +39,13 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton addButton;
 
     @Override
+    protected void onRestart() {
+        super.onRestart();
+        finish();
+        startActivity(getIntent());
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         try {
 
@@ -47,15 +55,13 @@ public class MainActivity extends AppCompatActivity {
             Executor newExecutor = Executors.newSingleThreadExecutor();
             FragmentActivity activity = this;
 
-
             final BiometricPrompt myBiometricPrompt = new BiometricPrompt(activity, newExecutor, new BiometricPrompt.AuthenticationCallback() {
 
                 @Override
                 //onAuthenticationError is called when a fatal error occurrs//
                 public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
                     super.onAuthenticationError(errorCode, errString);
-                    // finish();
-
+                    //finish();
                 }
 
                 @Override
@@ -124,4 +130,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }
