@@ -33,7 +33,7 @@ import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getName();
-    private boolean authenticationSucess = true;
+    private boolean authenticationSucess = false;
     private RecyclerView mainRecyclerView;
     public ArrayList<Model> list;
     private FloatingActionButton addButton;
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 //onAuthenticationError is called when a fatal error occurrs//
                 public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
                     super.onAuthenticationError(errorCode, errString);
-                    //finish();
+                    finish();
                 }
 
                 @Override
