@@ -37,22 +37,25 @@ public class AddPasswordDetails extends AppCompatActivity {
             username = (TextView) findViewById(R.id.usernameNewData);
             password = (TextView) findViewById(R.id.passwordNewData);
             application = (TextView) findViewById(R.id.appNameNewData);
-            domain = (TextView) findViewById(R.id.domain);
-            url = (TextView) findViewById(R.id.url);
+            domain = (TextView) findViewById(R.id.domainNewDta);
+            url = (TextView) findViewById(R.id.urlAddNewData);
             ImageView save = (ImageView) findViewById(R.id.saveData);
             ImageView close = (ImageView) findViewById(R.id.CancelData);
+            ImageView upload = (ImageView) findViewById(R.id.uploadPasswords);
             final DBHelper dbHelper = new DBHelper(this);
             save.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (!application.getText().toString().matches("") && !username.getText().toString().matches("") && !password.getText().toString().matches("")) {
-                        boolean sucess = dbHelper.addData(application.getText().toString(), username.getText().toString(), password.getText().toString(), domain.getText().toString(), url.getText().toString());
+                        boolean sucess = dbHelper.addData(application.getText().toString(), username.getText().toString(), password.getText().toString(), domain.getText().toString()!=""?domain.getText().toString():"", url.getText().toString()!=""?url.getText().toString():"");
                         Toast toast = null;
                         if (sucess) {
                             toast = Toast.makeText(getApplicationContext(), "Data saved successfully...", Toast.LENGTH_SHORT);
                             username.setText(null);
                             application.setText(null);
                             password.setText(null);
+                            domain.setText(null);
+                            url.setText(null);
                         } else {
                             toast = Toast.makeText(getApplicationContext(), "Same App name Exists, please add some text after app name to make it unique..", Toast.LENGTH_SHORT);
                         }
@@ -67,12 +70,27 @@ public class AddPasswordDetails extends AppCompatActivity {
             close.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(AddPasswordDetails.this, MainActivity.class);
-                    startActivity(intent);
+                    finish();
+//                    Intent intent = new Intent(AddPasswordDetails.this, MainActivity.class);
+//                    startActivity(intent);
+                }
+            });
+
+            upload.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "This functionality implementation is in progress..", Toast.LENGTH_SHORT);
+                    toast.show();
                 }
             });
         } catch (Exception ex) {
             Log.d("Error", "onCreate: " + ex);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

@@ -1,22 +1,29 @@
 package com.dheeraj.passwordmanager;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder>{
+public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder> {
     private ArrayList<Model> mData;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
+    private Context currentContext;
+    public Model currenClickedData;
 
     // data is passed into the constructor
     MyListAdapter(Context context, ArrayList<Model> data) {
@@ -34,7 +41,7 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-       // String app = mData.;
+        // String app = mData.;
         final Model myListData = mData.get(position);
 
         holder.application.setText(myListData.application);
@@ -70,13 +77,29 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
             pass = itemView.findViewById(R.id.password);
             application = itemView.findViewById(R.id.appName);
             url = itemView.findViewById(R.id.url);
-            sImage=itemView.findViewById(R.id.sImage);
+            sImage = itemView.findViewById(R.id.sImage);
+            currentContext = itemView.getContext();
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
             if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
+//            currenClickedData.password = this.pass.getText().toString();
+//            currenClickedData.application = this.application.getText().toString();
+//            currenClickedData.domain = this.domain.getText().toString();
+//            currenClickedData.url = this.url.getText().toString();
+//            currenClickedData.userName = this.email.getText().toString();
+            ArrayList<String> data = new ArrayList<>();
+            data.add(this.pass.getText().toString());
+            data.add(this.application.getText().toString());
+            data.add(this.domain.getText().toString());
+            data.add(this.url.getText().toString());
+            data.add(this.email.getText().toString());
+            final Intent intent = new Intent(currentContext, PasswordEditActivity.class);
+            intent.putStringArrayListExtra("CurrentViewValuesForUpdate", data);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            currentContext.startActivity(intent);
         }
     }
 
