@@ -34,9 +34,9 @@ public class AddPasswordDetails extends AppCompatActivity {
 
 //            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //            setSupportActionBar(toolbar);
-            username = (TextView) findViewById(R.id.usernameNewData);
+            username = (TextView) findViewById(R.id.usernameNewData);//this is a comment
             password = (TextView) findViewById(R.id.passwordNewData);
-            application = (TextView) findViewById(R.id.appNameNewData);
+            data = (TextView) findViewById(R.id.appNameNewData);
             domain = (TextView) findViewById(R.id.domainNewDta);
             url = (TextView) findViewById(R.id.urlAddNewData);
             ImageView save = (ImageView) findViewById(R.id.saveData);
