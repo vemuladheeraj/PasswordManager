@@ -21,7 +21,8 @@ class AESUtils {
 
         byte[] enc = toByte(encrypted);
         byte[] result = decrypt(enc);
-        return new String(result);
+        String str= new String(result);
+        return str;
     }
 
     private static byte[] getRawKey() throws Exception {
