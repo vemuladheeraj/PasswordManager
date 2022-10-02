@@ -57,7 +57,8 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(SQL_DELETE_ENTRIES);
-        onCreate(db);
+        onCreate(d0b);
+        //NOt sure
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
