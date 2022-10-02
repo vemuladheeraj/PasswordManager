@@ -58,6 +58,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(SQL_DELETE_ENTRIES);
         onCreate(db);
+        System.Out.Println("test");
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
